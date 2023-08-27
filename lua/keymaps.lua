@@ -17,7 +17,7 @@ vim.keymap.set('n', '<C-f>', 'zz4k', opts)
 vim.keymap.set('n', '<C-b>', 'zz4j', opts)
 
 -- Control N for new terminal
-vim.keymap.set('n', '<C-n>', ':tabnew | term<CR>', opts)
+vim.keymap.set('n', '<C-n>', ':30sp | term<CR>', opts)
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
