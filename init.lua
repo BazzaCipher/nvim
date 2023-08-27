@@ -85,3 +85,13 @@ local on_attach = function(_, bufnr)
 	end, { desc = 'Format current buffer with LSP' })
 end
 
+-- Configure LSP
+require'lspconfig'.rust_analyzer.setup{
+	settings = {
+		['rust-analyzer'] = {
+			diagnostics = {
+				enable = false
+			}
+		}
+	}
+}

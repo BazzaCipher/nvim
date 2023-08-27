@@ -16,3 +16,7 @@ vim.opt.splitbelow = true			-- New vertical split bottom
 vim.opt.splitright = true			-- New horizontal splits right
 vim.opt.showmode = false			-- Thanks being around -- INSERT --
 
+-- Highlight cursor
+vim.opt.cursorline = true			-- Highlight current line number
+vim.opt.scrolloff = 5				-- Don't allow cursor at very bottom
+
