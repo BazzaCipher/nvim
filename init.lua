@@ -93,5 +93,6 @@ require'lspconfig'.rust_analyzer.setup{
 				enable = false
 			}
 		}
-	}
+	},
+	on_attach = on_attach
 }
