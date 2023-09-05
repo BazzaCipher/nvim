@@ -86,13 +86,35 @@ local on_attach = function(_, bufnr)
 end
 
 -- Configure LSP
-require'lspconfig'.rust_analyzer.setup{
-	settings = {
-		['rust-analyzer'] = {
-			diagnostics = {
-				enable = false
+-- require'lspconfig'.rust_analyzer.setup{
+-- 	server = {
+-- 		settings = {
+-- 			['rust-analyzer'] = {
+-- 				diagnostics = {
+-- 					enable = false
+-- 				}
+-- 			}
+-- 		},
+-- 		on_attach = on_attach,
+-- 	}
+-- }
+local rusttoolsopts = {
+	tools = {
+		autoSetHints = true,
+	},
+	server = {
+		on_attach = on_attach,
+		settings = {
+			["rust-analyzer"] = {
+				checkOnSave = {
+					command = "clippy"
+				}
 			}
 		}
-	},
-	on_attach = on_attach
+	}
 }
+
+require('rust-tools').setup(rusttoolsopts)
+
+-- Commenting
+require('Comment').setup()
