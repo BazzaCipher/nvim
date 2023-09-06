@@ -19,8 +19,15 @@ vim.keymap.set('n', '<C-b>', 'zz4j', opts)
 -- Control N for new terminal
 vim.keymap.set('n', '<C-n>', ':sp | term<CR>', opts)
 
--- Better command windows navigation, better keymap
-vim.keymap.set('t', '<C-space>', '<C-\\><C-n>', opts)
+-- Better command windows navigation
+vim.keymap.set('t', '<A-h>', '<C-\\><C-n><C-w>h', opts)
+vim.keymap.set('t', '<A-j>', '<C-\\><C-n><C-w>j', opts)
+vim.keymap.set('t', '<A-k>', '<C-\\><C-n><C-w>k', opts)
+vim.keymap.set('t', '<A-l>', '<C-\\><C-n><C-w>l', opts)
+vim.keymap.set('n', '<A-h>', '<C-w>h', opts)
+vim.keymap.set('n', '<A-j>', '<C-w>j', opts)
+vim.keymap.set('n', '<A-k>', '<C-w>k', opts)
+vim.keymap.set('n', '<A-l>', '<C-w>l', opts)
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

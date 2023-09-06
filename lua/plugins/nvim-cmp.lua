@@ -21,7 +21,7 @@ return {
 	opts = {
 		snippet = {
 			expand = function(args)
-				vim.fn['vsnip#anonymous'](args.body)
+				require('luasnip').lsp_expand(args.body)
 			end,
 		},
 		mapping = {
@@ -42,11 +42,11 @@ return {
 		-- Installed sources
 		sources = {
 			{ name = 'nvim_lsp' },
-			{ name = 'vsnip' },
 			{ name = 'path' },
 			{ name = 'buffer' },
 			{ name = 'nvim_lua' },
 			{ name = 'emoji' },
+			{ name = 'luasnip' },
 		},
 	}
 	---@param opts cmp.ConfigSchema
