@@ -118,3 +118,13 @@ require('rust-tools').setup(rusttoolsopts)
 
 -- Commenting
 require('Comment').setup()
+
+require('mason').setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
