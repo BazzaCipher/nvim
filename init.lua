@@ -98,23 +98,6 @@ end
 -- 		on_attach = on_attach,
 -- 	}
 -- }
-local rusttoolsopts = {
-	tools = {
-		autoSetHints = true,
-	},
-	server = {
-		on_attach = on_attach,
-		settings = {
-			["rust-analyzer"] = {
-				checkOnSave = {
-					command = "clippy"
-				}
-			}
-		}
-	}
-}
-
-require('rust-tools').setup(rusttoolsopts)
 
 -- Commenting
 require('Comment').setup()
@@ -170,7 +153,30 @@ require('dapui').setup({
 	},
 })
 
+-- Must occur after mason is set up
+require("mason-nvim-dap").setup({
+	ensure_installed = { "codelldb" },
+	automatic_setup = true
+})
+
 local dap = require('dap')
+local cwd = vim.fn.getcwd()
+local exefile = cwd .. '\\target\\debug\\' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. '.exe'
+dap.configurations.rust = {
+  {
+    name = "Launch file",
+    type = "rt_lldb",
+    request = "launch",
+    program = function()
+		vim.fn.jobstart('cargo build')
+		return exefile
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+	showDisassembly = 'never',
+  },
+}
+
 vim.fn.sign_define('DapBreakpoint', { text = '🐞' }) -- Looks pretty
 
 local dapremap = function ()
@@ -204,11 +210,40 @@ local dapremap = function ()
 	-- Close debugger and clear breakpoints
 	nmapdap("<leader>de", function()
 	  dap.clear_breakpoints()
-	  ui.toggle({})
+	  require('dapui').toggle({})
 	  dap.terminate()
 	  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
-	  require("notify")("Debugger session ended", "warn")
+	  -- require("notify")("Debugger session ended", "warn")
 	end, '[E]nd debugger')
 end
 
 dapremap()
+
+local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path() .. "\\extension\\"
+local codelldb_path = codelldb_root .. "adapter\\codelldb.exe"
+local liblldb_path = codelldb_root .. "lldb\\lib\\liblldb.lib"
+
+local adap = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+adap.executable.detached = false
+
+local rusttoolsopts = {
+	tools = {
+		autoSetHints = true,
+	},
+	dap = {
+		adapters = adap
+	},
+	server = {
+		on_attach = on_attach,
+		settings = {
+			["rust-analyzer"] = {
+				checkOnSave = {
+					command = "clippy"
+				}
+			}
+		}
+	}
+}
+
+require('rust-tools').setup(rusttoolsopts)
+

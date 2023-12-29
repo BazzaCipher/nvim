@@ -57,6 +57,7 @@ return {
 			{ name = 'nvim_lua' },
 			{ name = 'emoji' },
 			{ name = 'luasnip' },
+			{ name = 'crates' },
 		},
 	}
 	---@param opts cmp.ConfigSchema
