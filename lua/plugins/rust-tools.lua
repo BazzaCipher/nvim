@@ -2,6 +2,7 @@
 -- https://github.com/sharksforarms/neovim-rust/blob/master/neovim-init-lsp-cmp-rust-tools.lua
 return {
 	'simrat39/rust-tools.nvim',
+	event = { "BufRead *.rs", "BufRead Cargo.*" },
 	opts = {
 		tools = {
 			runnables = {
