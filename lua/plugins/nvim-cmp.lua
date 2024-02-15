@@ -26,28 +26,24 @@ return {
 		},
 		mapping = {
 			-- Add tab support
-			['<S-Tab>'] = cmp.mapping.select_next_item(),
+			['<S-Tab>'] = cmp.mapping.select_prev_item(),
 			-- ['<Tab>'] = cmp.mapping.complete(),
 			['<C-d>'] = cmp.mapping.scroll_docs(-4),
 			['<C-f>'] = cmp.mapping.scroll_docs(4),
 			-- ['<C-Space>'] = cmp.mapping.complete(),
 			['<C-e>'] = cmp.mapping.close(),
-			-- ['<Tab>'] = cmp.mapping.confirm({
-			-- 	behavior = cmp.ConfirmBehavior.Insert,
-			-- 	select = false,
-			["<Tab>"] = cmp.mapping(function(fallback)
-			-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+			['<Tab>'] = cmp.mapping.select_next_item(),
+			['<CR>'] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					local entry = cmp.get_selected_entry()
-			if not entry then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-			else
-				cmp.confirm()
-			end
-				else
-					fallback()
+					if entry then
+						cmp.confirm()
+					else
+						fallback()
+					end
 				end
-			end, {"i","s","c",}),			-- }),
+			end
+			, {"i"})
 		},
 		-- Installed sources
 		sources = {
