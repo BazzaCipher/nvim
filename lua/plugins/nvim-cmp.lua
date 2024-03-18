@@ -38,10 +38,10 @@ return {
 					local entry = cmp.get_selected_entry()
 					if entry then
 						cmp.confirm()
-					else
-						fallback()
+						return
 					end
 				end
+				fallback()
 			end
 			, {"i"})
 		},
