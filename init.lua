@@ -247,5 +247,3 @@ local rusttoolsopts = {
 
 require('rust-tools').setup(rusttoolsopts)
 
-require('mini.pairs').setup()
-
