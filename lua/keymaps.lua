@@ -40,5 +40,8 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Keymap specifically for end of quotes escaping
-vim.keymap.set('i', '<C-d>', '<C-o>a')
+vim.keymap.set('i', '<C-d>', '<C-o>a', opts)
+
+-- Keymap for pasting in neovim
+vim.keymap.set('v', '<leader>]', '"+y', opts)
 

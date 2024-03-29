@@ -247,3 +247,12 @@ local rusttoolsopts = {
 
 require('rust-tools').setup(rusttoolsopts)
 
+-- Install xclip if we haven't got it
+local xclipinstall = function()
+	if vim.fn.has('unix') and vim.fn.system('dpkg-query -s xclip 2>/dev/null | grep -c "ok installed"') == 0 then
+		print("Please install 'xclip' for system clipboard functionality")
+	end
+end
+
+xclipinstall()
+
