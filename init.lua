@@ -29,16 +29,14 @@ require('lazy').setup({
 vim.cmd.colorscheme 'nord'
 
 -- Telescope prefix naming
-require('which-key').register({['<leader>f'] = { name = '+file' } })
+local wk = require('which-key')
+wk.register({['<leader>f'] = { name = '+file' } })
 
 -- Leap motions
 require('leap').add_default_mappings()
 
 -- Set up status line
 require('lualine').setup{ options = { theme = 'nord' } }
-
--- Gitsigns
-require('gitsigns').setup()
 
 -- Configure LSP and Default Keymaps
 --  This function gets run when an LSP connects to a particular buffer.
@@ -179,45 +177,36 @@ dap.configurations.rust = {
 
 vim.fn.sign_define('DapBreakpoint', { text = '🐞' }) -- Looks pretty
 
-local dapremap = function ()
-	local nmapdap = function(keys, func, desc)
-		if desc then
-			desc = 'DAP: ' .. desc
-		end
-
-		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+-- DAP remappings
+local rn = function(desc)
+	if desc then
+		return "DAP: " .. desc 
 	end
-
-	-- Start debugging session
-	nmapdap('<leader>ds', function()
+end
+wk.register({ ["<leader>d"] = {
+	name = "+debugger",
+	s = {function()
 		dap.continue()
 		require('dapui').toggle({})
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w>=', false, true, true), 'n', false) -- Even space buffers end
-	end, '[S]tart debugger')
-
-	-- Set breakpoints, get variable values, step into/out of functions, etc.
-	-- nmapdap("<leader>dl", require("dap.ui.widgets").hover)
-	nmapdap("<leader>dc", dap.continue, '[C]ontinue')
-	nmapdap("<leader>db", dap.toggle_breakpoint, 'Toggle [B]reakpoint')
-	nmapdap("<leader>dn", dap.step_over, 'Step Over')
-	nmapdap("<leader>di", dap.step_into, 'Step [I]nto')
-	nmapdap("<leader>do", dap.step_out, 'Step [O]ut')
-	-- nmapdap("<leader>dC", function()
-	-- 	dap.clear_breakpoints()
-	-- 	require("notify")("Breakpoints cleared", "warn")
-	-- end)
- 
-	-- Close debugger and clear breakpoints
-	nmapdap("<leader>de", function()
-	  dap.clear_breakpoints()
-	  require('dapui').toggle({})
-	  dap.terminate()
-	  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
-	  -- require("notify")("Debugger session ended", "warn")
-	end, '[E]nd debugger')
-end
-
-dapremap()
+	end, rn('[S]tart debugger')},
+	e = { function()
+		dap.clear_breakpoints()
+		require('dapui').toggle({})
+		dap.terminate()
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+		-- require("notify")("Debugger session ended", "warn")
+	end, rn('[E]nd debugger')},
+	c = { dap.continue, rn('[C]ontinue') },
+	b = { dap.toggle_breakpoint, rn('Toggle [B]reakpoint') },
+	n = { dap.step_over, rn('Step Over') },
+	i = { dap.step_into, rn('Step [I]nto') },
+	o = { dap.step_out, rn('Step [O]ut') },
+	C = { function()
+		dap.clear_breakpoints()
+		-- require('notify')('Breakpoints cleared', 'warn')
+	end , rn('[C]lear Breakpoints')}
+}}, { buffer = bufnr })
 
 local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path() .. "\\extension\\"
 local codelldb_path = codelldb_root .. "adapter\\codelldb.exe"

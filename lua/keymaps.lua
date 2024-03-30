@@ -13,8 +13,8 @@ vim.keymap.set('n', '<C-s>', '<C-w>s', opts)
 vim.keymap.set('n', '<C-s><C-s>', '<C-w>s', opts)
 
 -- Better text skipping and hopping
-vim.keymap.set('n', '<C-f>', 'zz4k', opts)
-vim.keymap.set('n', '<C-b>', 'zz4j', opts)
+vim.keymap.set('n', '<C-f>', '4k', opts)
+vim.keymap.set('n', '<C-c>', '4j', opts)
 
 -- Control N for new terminal
 vim.keymap.set('n', '<C-n>', ':sp | term<CR>', opts)
@@ -43,5 +43,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('i', '<C-d>', '<C-o>a', opts)
 
 -- Keymap for pasting in neovim
-vim.keymap.set('v', '<leader>]', '"+y', opts)
+vim.keymap.set('v', '<leader>]', '"+y', { desc = 'Copy to clipboard' })
+vim.keymap.set('n', '<leader>]', '"+p', { desc = 'Paste from clipboard' })
 
