@@ -1,16 +1,18 @@
 -- File finder and search functionality
 return {
 	"nvim-telescope/telescope.nvim",
+	lazy = false, -- Telescope is usually used immediately
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope-fzf-native.nvim',
 		'nvim-treesitter/nvim-treesitter',
 		'nvim-treesitter/nvim-treesitter-textobjects',
-		build = "make; :TSUpdate",
-		config = function()
-			require("telescope").load_extension("fzf")
-		end,
 	},
+
+	build = "make; :TSUpdate",
+	config = function()
+		require("telescope").load_extension("fzf")
+	end,
 	init = function()
 		local builtin = require('telescope.builtin')
 		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })

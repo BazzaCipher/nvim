@@ -97,20 +97,6 @@ require('lualine').setup{ options = { theme = 'nord' } }
 -- 	}
 -- }
 
--- Commenting
--- TODO: Fix commenting keymaps
-require('Comment').setup()
-
-require('mason').setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
-})
-
 -- Must occur after mason is set up
 require("mason-nvim-dap").setup({
 	ensure_installed = {
@@ -190,6 +176,7 @@ local rn = function(desc)
 		return "DAP: " .. desc 
 	end
 end
+
 wk.register({ ["<leader>d"] = {
 	name = "+debugger",
 	s = {function()

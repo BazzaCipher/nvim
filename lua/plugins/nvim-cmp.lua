@@ -1,8 +1,6 @@
 -- Neovim autocomplete
 -- Very important to have snippet completion
 
-local cmp = require('cmp')
-
 -- Diagnostic column and some ms of no cursor movement to trigger CursorHold
 vim.wo.signcolumn = 'yes'
 vim.opt.updatetime = 300
@@ -18,32 +16,12 @@ return {
 		'hrsh7th/nvim-cmp',
 		'hrsh7th/cmp-nvim-lua',
 	},
+	event = { 'InsertEnter', 'CmdlineEnter' },
 	opts = {
 		snippet = {
 			expand = function(args)
 				require('luasnip').lsp_expand(args.body)
 			end,
-		},
-		mapping = {
-			-- Add tab support
-			['<S-Tab>'] = cmp.mapping.select_prev_item(),
-			-- ['<Tab>'] = cmp.mapping.complete(),
-			['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			-- ['<C-Space>'] = cmp.mapping.complete(),
-			['<C-e>'] = cmp.mapping.close(),
-			['<Tab>'] = cmp.mapping.select_next_item(),
-			['<CR>'] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					local entry = cmp.get_selected_entry()
-					if entry then
-						cmp.confirm()
-						return
-					end
-				end
-				fallback()
-			end
-			, {"i"})
 		},
 		-- Installed sources
 		sources = {
@@ -55,7 +33,35 @@ return {
 			{ name = 'luasnip' },
 			{ name = 'crates' },
 		},
-	}
+	},
+	-- config = function(plugin, opts)
+	-- 	-- TODO Fix this
+	-- 	local cmp = require('cmp')
+	-- 	local wk = require('which-key')
+	-- 	cmp.setup(opts)
+	--
+	-- 	wk.register({
+	-- 		-- Note that calling each of these functions returns another function
+	-- 		['<Tab>'] = { cmp.mapping.select_next_item(), 'Select Next' },
+	-- 		['<S-Tab>'] = { cmp.mapping.select_prev_item(), 'Select Previous' },
+	-- 		['<C-d>'] = { cmp.mapping.scroll_docs(-4), 'Scroll Down' },
+	-- 		['<C-f>'] = { cmp.mapping.scroll_docs(4), 'Scroll Up' },
+	-- 		['<C-e>'] = { cmp.mapping.close(), 'Close' },
+	-- 		-- ['<CR>'] = { cmp.mapping(
+	-- 		-- 	function(fallback)
+	-- 		-- 		if cmp.visible() then
+	-- 		-- 			local entry = cmp.get_selected_entry()
+	-- 		-- 			if entry then
+	-- 		-- 				cmp.mapping.confirm()
+	-- 		-- 				return
+	-- 		-- 			end
+	-- 		-- 		end
+	-- 		-- 		fallback()
+	-- 		-- 	end), 'Enter'
+	-- 		-- }
+	-- 		['<CR>'] = { cmp.mapping.confirm({ select = false }) }
+	-- 	}, { mode = 'i' })
+	-- end,
 	---@param opts cmp.ConfigSchema
 	-- opts = function(_, opts)
 	-- 	local cmp = require('cmp')
