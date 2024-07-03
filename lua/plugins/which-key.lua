@@ -4,7 +4,7 @@ return {
   event = "VeryLazy",
   init = function()
     vim.o.timeout = true
-    vim.o.timeoutlen = 1000
+    vim.o.timeoutlen = 3000
   end,
   opts = {
     -- your configuration comes here
