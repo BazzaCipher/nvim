@@ -15,9 +15,15 @@ return {
 	end,
 	init = function()
 		local builtin = require('telescope.builtin')
-		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
-		vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
-		vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind in [B]uffers' })
-		vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+		local wk = require('which-key')
+		wk.register({
+			f = {
+				name = '+file',
+				f = { builtin.find_files, '[F]ind [F]iles' },
+				g = { builtin.live_grep, '[F]ind by [G]rep' },
+				b = { builtin.buffers, '[F]ind in [B]uffers' },
+				h = { builtin.help_tags, '[F]ind [H]elp' },
+			}
+		}, { prefix = "<leader>"})
 	end
 }

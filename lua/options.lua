@@ -20,3 +20,6 @@ vim.opt.showmode = false			-- Thanks being around -- INSERT --
 vim.opt.cursorline = true			-- Highlight current line number
 vim.opt.scrolloff = 5				-- Don't allow cursor at very bottom
 
+-- Because nvim-cmp said so...
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+

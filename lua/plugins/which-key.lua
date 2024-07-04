@@ -1,10 +1,11 @@
 -- Show keybindings
+-- Please try to keep keybindings with unique beginnings
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   init = function()
     vim.o.timeout = true
-    vim.o.timeoutlen = 3000
+    vim.o.timeoutlen = 2000
   end,
   opts = {
     -- your configuration comes here

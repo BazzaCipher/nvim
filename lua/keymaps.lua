@@ -4,19 +4,13 @@ local opts = {
 	silent = true,				-- Do not show message
 }
 
--- Better windows navigation, taking Ctrl-{hjkl}
-vim.keymap.set('n', '<C-h>', '<C-w>h', opts)
-vim.keymap.set('n', '<C-j>', '<C-w>j', opts)
-vim.keymap.set('n', '<C-k>', '<C-w>k', opts)
-vim.keymap.set('n', '<C-l>', '<C-w>l', opts)
-vim.keymap.set('n', '<C-s>', '<C-w>s', opts)
-vim.keymap.set('n', '<C-s><C-s>', '<C-w>s', opts)
 
 -- Better text skipping and hopping
 vim.keymap.set('n', '<C-f>', '4k', opts)
 vim.keymap.set('n', '<C-c>', '4j', opts)
 
--- Control N for new terminal
+-- Ctrl n for new terminal, Ctrl s for split
+vim.keymap.set('n', '<C-s>', '<C-w>s', opts)
 vim.keymap.set('n', '<C-n>', ':sp | term<CR>', opts)
 
 -- Better command windows navigation
@@ -43,6 +37,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('i', '<C-d>', '<C-o>a', opts)
 
 -- Keymap for pasting in neovim
-vim.keymap.set('v', '<leader>]', '"+y', { desc = 'Copy to clipboard' })
+vim.keymap.set('v', '<leader>[', '"+y', { desc = 'Copy to clipboard' })
+vim.keymap.set('v', '<leader>]', '"+y', { desc = 'Paste from clipboard' })
 vim.keymap.set('n', '<leader>]', '"+p', { desc = 'Paste from clipboard' })
 
