@@ -9,7 +9,7 @@ return {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 	},
 
-	build = "make; :TSUpdate",
+	build = ":TSUpdate",
 	config = function()
 		require("telescope").load_extension("fzf")
 	end,
