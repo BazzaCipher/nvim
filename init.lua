@@ -57,29 +57,7 @@ require('lazy').setup({
 -- s for navigation
 -- S for cross-window navigation
 
--- Configure LSP and Default Keymaps
--- -- Configure LSP
--- require'lspconfig'.rust_analyzer.setup{
--- 	server = {
--- 		settings = {
--- 			['rust-analyzer'] = {
--- 				diagnostics = {
--- 					enable = false
--- 				}
--- 			}
--- 		},
--- 		on_attach = on_attach,
--- 	}
--- }
-
 -- Must occur after mason is set up
-require("mason-nvim-dap").setup({
-	ensure_installed = {
-		"codelldb",
-		-- Append any necessary here
-	},
-	automatic_setup = true
-})
 
 -- Set up DAP
 vim.fn.sign_define('DapBreakpoint', { text = '🐞' }) -- Looks pretty
