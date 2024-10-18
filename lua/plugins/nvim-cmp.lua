@@ -48,7 +48,7 @@ return {
 		  require('nvim-autopairs.completion.cmp').on_confirm_done()
 		)
 
-		require('which-key').register({
+		require('which-key').add({
 			-- Note that calling each of these functions returns another function
 			['<Tab>'] = { cmp.mapping.select_next_item(), 'Select Next' },
 			['<S-Tab>'] = { cmp.mapping.select_prev_item(), 'Select Previous' },

@@ -16,7 +16,6 @@ return {
 		local servers = {
 			'rust_analyzer',
 			'pyright',
-			'tsserver',
 			'lua_ls'
 		}
 
