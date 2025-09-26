@@ -41,6 +41,7 @@ return {
 	},
 	config = function(_, opts)
 		local cmp = require('cmp')
+		local wk = require('which-key')
 		cmp.setup(opts)
 		-- Set up autopairs
 		cmp.event:on(
@@ -48,7 +49,7 @@ return {
 		  require('nvim-autopairs.completion.cmp').on_confirm_done()
 		)
 
-		require('which-key').add({
+		wk.add({
 			-- Note that calling each of these functions returns another function
 			['<Tab>'] = { cmp.mapping.select_next_item(), 'Select Next' },
 			['<S-Tab>'] = { cmp.mapping.select_prev_item(), 'Select Previous' },
@@ -68,6 +69,5 @@ return {
 				end), 'Enter'
 			}
 		}, { mode = 'i' })
-		print("done")
 	end,
 }

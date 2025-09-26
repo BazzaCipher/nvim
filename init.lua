@@ -4,6 +4,7 @@ vim.g.maplocalleader = ' '
 -- Import keybinds and options for default vim, i.e. not plugin-dependent
 require('options')
 require('keymaps')
+require('nerd_font_check')
 
 -- Guarantees install of lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
