@@ -73,13 +73,5 @@ return {
 
 			end
 		})
-
-		-- Set up the LSP servers iteratively
-		local lsp = require('lspconfig')
-		for _, ls in ipairs(servers) do
-			lsp[ls].setup {
-				capabilities = capabilities
-			}
-		end
 	end
 }

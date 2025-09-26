@@ -38,7 +38,7 @@ require('lazy').setup({
 -- nvim-cmp             
 -- mason
 -- mason-nvim-dap
--- rust-tools
+-- rustaceanvim
 -- nvim-dap
 -- luasnip
 -- cmp-emoji
@@ -125,13 +125,6 @@ require('dapui')
 
 ----- Start lspconfig because it doesn't automagically
 -- require('lspconfig').setup()
-
-local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path() .. "\\extension\\"
-local codelldb_path = codelldb_root .. "adapter\\codelldb.exe"
-local liblldb_path = codelldb_root .. "lldb\\lib\\liblldb.lib"
-
-local adap = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-adap.executable.detached = false
 
 -- local rusttoolsopts = {
 -- 	tools = {

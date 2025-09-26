@@ -17,7 +17,7 @@ return {
 		local builtin = require('telescope.builtin')
 		local wk = require('which-key')
 		wk.add({
-			{ '<leader>f', group = "File" },
+			{ '<leader>f', group = "file" },
 			{ '<leader>ff', builtin.find_files, desc = '[F]ind [F]iles' },
 			{ '<leader>fg', builtin.live_grep,  desc = '[F]ind by [G]rep' },
 			{ '<leader>fb', builtin.buffers,    desc = '[F]ind in [B]uffers' },

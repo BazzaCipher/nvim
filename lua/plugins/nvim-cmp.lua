@@ -50,13 +50,14 @@ return {
 		)
 
 		wk.add({
+			mode = { 'i' },
 			-- Note that calling each of these functions returns another function
-			['<Tab>'] = { cmp.mapping.select_next_item(), 'Select Next' },
-			['<S-Tab>'] = { cmp.mapping.select_prev_item(), 'Select Previous' },
-			['<C-d>'] = { cmp.mapping.scroll_docs(-4), 'Scroll Down' },
-			['<C-f>'] = { cmp.mapping.scroll_docs(4), 'Scroll Up' },
-			['<C-e>'] = { cmp.mapping.close(), 'Close' },
-			['<CR>'] = { cmp.mapping(
+			{ '<Tab>', cmp.mapping.select_next_item, desc = 'Select Next' },
+			{ '<S-Tab>', cmp.mapping.select_prev_item, desc = 'Select Previous' },
+			{ '<C-d>', function() cmp.mapping.scroll_docs(-4) end, desc = 'Scroll Down' },
+			{ '<C-f>', function() cmp.mapping.scroll_docs(4) end, desc = 'Scroll Up' },
+			{ '<C-e>', function() cmp.mapping.close() end, desc = 'Close' },
+			{ '<CR>', function() cmp.mapping(
 				function(fallback)
 					if cmp.visible() then
 						local entry = cmp.get_selected_entry()
@@ -66,8 +67,8 @@ return {
 						end
 					end
 					fallback()
-				end), 'Enter'
+				end) end, desc = 'Enter'
 			}
-		}, { mode = 'i' })
+		})
 	end,
 }
