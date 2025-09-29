@@ -16,14 +16,14 @@ return {
 		local servers = {
 			'rust_analyzer',
 			'pyright',
-			'lua_ls'
+			'lua_ls',
 		}
 
 		-- Guarantee installation of LSP servers
 		require('mason').setup()
 		local mason_lspconfig = require('mason-lspconfig')
 		mason_lspconfig.setup {
-			ensure_installed = servers
+			ensure_installed = servers,
 		}
 
 		vim.api.nvim_create_autocmd('LspAttach', {

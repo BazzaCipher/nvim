@@ -145,8 +145,6 @@ require('dapui')
 -- 	}
 -- }
 --
--- require('rust-tools').setup(rusttoolsopts)
---
 
 ---- Debugging the lsp
 -- vim.lsp.set_log_level('debug')
