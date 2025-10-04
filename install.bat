@@ -5,6 +5,8 @@
 
 choco install llvm -y
 choco install ripgrep -y
+choco install cmake -y
+choco install make -y
 
 :: Install Hack Nerd Font for support with neovim
 choco install nerd-fonts-hack -y
