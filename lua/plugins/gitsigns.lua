@@ -3,6 +3,7 @@ return {
 	'lewis6991/gitsigns.nvim',
 	opts = {
 		-- See `:help gitsigns.txt`
+		sign_priority = 50,
 		signs = {
 			add = { text = '+' },
 			change = { text = '~' },
@@ -32,11 +33,11 @@ return {
 			wk.add({
 				{ "<leader>h", group = "hunk" },
 				{ "<leader>hs", function()
-					gs.stage_hunk(vim.fn.line('.'), vim.fn.line('v')) end,
-					desc = "[S]tage Hunk", mode = "v" },
+					gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end,
+					desc = "[S]tage Hunk", mode = { "n", "v" } },
 				{ "<leader>hr", function()
-					gs.reset_hunk(vim.fn.line('.'), vim.fn.line('v')) end,
-					desc = "[R]eset Hunk", mode = "v" },
+					gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end,
+					desc = "[R]eset Hunk", mode = { "n", "v" } },
 				{ "<leader>hS", gs.stage_buffer, desc = "[S]tage Buffer" },
 				{ "<leader>hu", gs.undo_stage_hunk, desc = "[U]ndo Stage Hunk" },
 				{ "<leader>hR", gs.reset_buffer, desc = "[R]eset Buffer" },

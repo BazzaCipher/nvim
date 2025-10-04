@@ -2,7 +2,7 @@
 -- Very important to have snippet completion
 
 -- Diagnostic column and some ms of no cursor movement to trigger CursorHold
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = 'yes:2'
 vim.opt.updatetime = 300
 
 return {
