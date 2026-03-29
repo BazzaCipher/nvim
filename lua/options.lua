@@ -23,3 +23,8 @@ vim.opt.scrolloff = 5				-- Don't allow cursor at very bottom
 -- Because nvim-cmp said so...
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+-- Disable unused providers
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+

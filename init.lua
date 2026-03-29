@@ -23,7 +23,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Imports all the packages in the lua/plugins folder
 require('lazy').setup({
 	{ import = 'plugins' },
-}, {})
+}, {
+	rocks = { enabled = false },
+})
 
 ----- Breakdown of all the plugins -----
 -- nord                 - Colorscheme
@@ -65,7 +67,7 @@ vim.fn.sign_define('DapBreakpoint', { text = '🐞' }) -- Looks pretty
 
 local dap = require('dap')
 local cwd = vim.fn.getcwd()
-local exefile = cwd .. '\\target\\debug\\' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. '.exe'
+local exefile = cwd .. '/target/debug/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
 dap.configurations.rust = {
   {
     name = "Launch file",
@@ -125,6 +127,13 @@ require('dapui')
 
 ----- Start lspconfig because it doesn't automagically
 -- require('lspconfig').setup()
+
+local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
+local codelldb_path = codelldb_root .. "adapter/codelldb"
+local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
+
+local adap = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+adap.executable.detached = false
 
 -- local rusttoolsopts = {
 -- 	tools = {
