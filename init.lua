@@ -128,32 +128,8 @@ require('dapui')
 ----- Start lspconfig because it doesn't automagically
 -- require('lspconfig').setup()
 
-local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
-local codelldb_path = codelldb_root .. "adapter/codelldb"
-local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
-
-local adap = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-adap.executable.detached = false
-
--- local rusttoolsopts = {
--- 	tools = {
--- 		autoSetHints = true,
--- 	},
--- 	dap = {
--- 		adapters = adap
--- 	},
--- 	server = {
--- 		-- on_attach = on_attach,
--- 		settings = {
--- 			["rust-analyzer"] = {
--- 				checkOnSave = {
--- 					command = "clippy"
--- 				}
--- 			}
--- 		}
--- 	}
--- }
---
+-- rust-tools is deprecated; use rustaceanvim if needed
+-- See: https://github.com/mrcjkb/rustaceanvim
 
 ---- Debugging the lsp
 -- vim.lsp.set_log_level('debug')

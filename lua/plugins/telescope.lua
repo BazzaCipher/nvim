@@ -13,14 +13,10 @@ return {
 	config = function()
 		require("telescope").load_extension("fzf")
 	end,
-	init = function()
-		local builtin = require('telescope.builtin')
-		require('which-key').add({
-			{ "<leader>f", group = "file" },
-			{ "<leader>ff", builtin.find_files, desc = "Find Files" },
-			{ "<leader>fg", builtin.live_grep, desc = "Find by Grep" },
-			{ "<leader>fb", builtin.buffers, desc = "Find in Buffers" },
-			{ "<leader>fh", builtin.help_tags, desc = "Find Help" },
-		})
-	end
+	keys = {
+		{ "<leader>ff", function() require('telescope.builtin').find_files() end, desc = "Find Files" },
+		{ "<leader>fg", function() require('telescope.builtin').live_grep() end, desc = "Find by Grep" },
+		{ "<leader>fb", function() require('telescope.builtin').buffers() end, desc = "Find in Buffers" },
+		{ "<leader>fh", function() require('telescope.builtin').help_tags() end, desc = "Find Help" },
+	}
 }
