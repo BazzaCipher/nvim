@@ -6,6 +6,7 @@ return {
 			"cpptools",
 			"codelldb",
 			"tsserver",
+			"tinymist",
 		}
 	},
 

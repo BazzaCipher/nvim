@@ -17,18 +17,34 @@ return {
 			'rust_analyzer',
 			'pyright',
 			'lua_ls',
+			'tinymist',
 		}
 
 		-- Guarantee installation of LSP servers
 		require('mason').setup()
 		local mason_lspconfig = require('mason-lspconfig')
 		mason_lspconfig.setup {
+			automatic_enable = false,
 			ensure_installed = servers,
 		}
 
+		-- Setup each server with capabilities
+		for _, server in ipairs(servers) do
+			local opts = { capabilities = capabilities }
+			if server == "tinymist" then
+				opts.settings = {
+					formatterMode = "typstyle",
+					exportPdf = "onType",
+					semanticTokens = "disable"
+				}
+			end
+			require("lspconfig")[server].setup(opts)
+		end
+
 		vim.api.nvim_create_autocmd('LspAttach', {
 			desc = 'LSP actions',
-			callback = function(_, bufnr)
+			callback = function(event)
+				local bufnr = event.buf
 				-- NOTE: Remember that lua is a real programming language, and as such it is possible
 				-- to define small helper and utility functions so you don't have to repeat yourself
 				-- many times.

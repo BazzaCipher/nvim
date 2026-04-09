@@ -1,6 +1,7 @@
 -- File finder and search functionality
 return {
 	"nvim-telescope/telescope.nvim",
+	branch = "0.1.x", -- pinned for nvim < 0.11
 	lazy = false, -- Telescope is usually used immediately
 	dependencies = {
 		'nvim-lua/plenary.nvim',
